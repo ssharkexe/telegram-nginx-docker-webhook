@@ -74,7 +74,6 @@
     curl http://your_domain.com
     ```
     Если появилась ошибка 301 - все отлично!  Идем дальше.
-
 <br/><br/>
 **Финальная часть. Получаем SSL сертификаты от Let's Encrypt**
 
@@ -108,7 +107,6 @@ docker compose --env-file .env build
 docker compose up
 ```
 В консоли появится "Telegram servers now send updates to https://your_domain.com. Bot is online". Вы великолепны!
-
 <br/><br/>
 ## Заметки
 Если вылезут баги, прошу оформить Issue.
