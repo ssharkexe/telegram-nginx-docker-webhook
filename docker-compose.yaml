@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  bot:
+    build: ./bot
+    restart: always
+    environment:
+      - TELEGRAM_TOKEN
+      - NGINX_HOST
+    ports:
+      - 3001:3001
+  nginx:
+    image: nginx:1.23-alpine
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    environment:
+      - NGINX_HOST
+    volumes:
+      - ./nginx/first_start/:/etc/nginx/templates/:ro
+      # - ./nginx/templates/:/etc/nginx/templates/:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+  certbot:
+    image: certbot/certbot:v2.5.0
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw

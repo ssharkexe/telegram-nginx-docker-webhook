@@ -1,0 +1,4 @@
+.env.test
+.env.prod
+.DS_Store
+echo/

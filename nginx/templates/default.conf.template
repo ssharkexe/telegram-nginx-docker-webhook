@@ -1,0 +1,34 @@
+upstream bot{
+        server bot:3001;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name ${NGINX_HOST} www.${NGINX_HOST};
+    server_tokens off;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://${NGINX_HOST}$request_uri;
+    }
+}
+
+server {
+    listen 443 default_server ssl http2;
+    listen [::]:443 ssl http2;
+
+    server_name ${NGINX_HOST};
+
+    ssl_certificate /etc/nginx/ssl/live/${NGINX_HOST}/fullchain.pem;
+    ssl_certificate_key /etc/nginx/ssl/live/${NGINX_HOST}/privkey.pem;
+    
+    location /webhook {
+    proxy_pass http://bot;
+    }
+}
+
