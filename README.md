@@ -38,12 +38,12 @@
 
     3.2. Клонируем этот репозиторий полностью:
     ```
-    git clone https://github.com/ssharkexe/repo.git
+    git clone https://github.com/ssharkexe/telegram-nginx-docker-webhook.git
     ```
 
     3.3. Переходим в папку с проектом и прописываем переменные окружения в .env файл:
     ```
-    cd repo
+    cd telegram-nginx-docker-webhook
     sudo nano .env
     ```
     указываем в кавычках токен вашего бота (TELEGRAM_TOKEN) и домен (NGINX_HOST), сохраняем.
